@@ -10,10 +10,20 @@ pipeline {
             steps {
                 checkout scm
             }
+            post {
+                failure {
+                    echo 'Checkout failed. Notifying the team...'
+                }
+            }
         }
         stage('Build and Test') {
             steps {
                 sh 'mvn clean package'
+            }
+            post {
+                failure {
+                    echo 'Build failed. Please check the logs.'
+                }
             }
         }
         stage('Static Code Analysis') {
@@ -25,11 +35,15 @@ pipeline {
                     sh 'mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=$SONAR_URL'
                 }
             }
+            post {
+                failure {
+                    echo 'Static code analysis failed. Review the SonarQube report.'
+                }
+            }
         }
         stage('Build and Push Docker Image') {
             environment {
                 DOCKER_IMAGE = "sahanal/backend:${BUILD_NUMBER}"
-                REGISTRY_CREDENTIALS = credentials('docker-cred')
             }
             steps {
                 script {
@@ -37,6 +51,11 @@ pipeline {
                     docker.withRegistry('https://index.docker.io/v1/', 'docker-cred') {
                         docker.image("${DOCKER_IMAGE}").push()
                     }
+                }
+            }
+            post {
+                failure {
+                    echo 'Docker image build or push failed.'
                 }
             }
         }
@@ -57,6 +76,19 @@ pipeline {
                     '''
                 }
             }
+            post {
+                failure {
+                    echo 'Deployment file update or Git push failed.'
+                }
+            }
+        }
+    }
+    post {
+        always {
+            echo 'Pipeline execution completed.'
+        }
+        failure {
+            echo 'Pipeline failed. Notifying stakeholders...'
         }
     }
 }

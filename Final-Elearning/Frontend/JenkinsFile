@@ -5,29 +5,76 @@ pipeline {
             args '--user root -v /var/run/docker.sock:/var/run/docker.sock'
         }
     }
+    environment {
+        SONAR_URL = "http://your-sonarqube-url"
+        SONAR_PROJECT_KEY = "frontend-project"
+        SONAR_PROJECT_NAME = "LMS Frontend"
+        SONAR_AUTH_TOKEN = credentials('sonarqube-token')
+        FRONTEND_DOCKER_IMAGE = "sahanal/lms-frontend:${BUILD_NUMBER}"
+    }
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/Sahana-bit-oss/LMS-Portal.git'
+                checkout scm
+            }
+            post {
+                failure {
+                    echo 'Checkout failed. Notifying the team...'
+                }
             }
         }
         stage('Install Dependencies') {
             steps {
-                sh 'cd Frontend && npm install'
+                dir('Frontend') {
+                    sh 'npm install'
+                }
+            }
+            post {
+                failure {
+                    echo 'Failed to install dependencies. Check npm logs.'
+                }
+            }
+        }
+        stage('Static Code Analysis') {
+            steps {
+                dir('Frontend') {
+                    sh '''
+                        npx sonar-scanner \
+                            -Dsonar.projectKey=${SONAR_PROJECT_KEY} \
+                            -Dsonar.projectName=${SONAR_PROJECT_NAME} \
+                            -Dsonar.sources=src \
+                            -Dsonar.host.url=${SONAR_URL} \
+                            -Dsonar.login=${SONAR_AUTH_TOKEN}
+                    '''
+                }
+            }
+            post {
+                failure {
+                    echo 'Static code analysis failed. Review the SonarQube report.'
+                }
             }
         }
         stage('Build Angular App') {
             steps {
-                sh 'cd Frontend && ng build --prod'
+                dir('Frontend') {
+                    sh 'ng build --prod'
+                }
+            }
+            post {
+                failure {
+                    echo 'Build failed. Please check the logs.'
+                }
             }
         }
         stage('Build Docker Image') {
-            environment {
-                FRONTEND_DOCKER_IMAGE = "sahanal/lms-frontend:${BUILD_NUMBER}"
-            }
             steps {
-                script {
-                    sh 'cd Frontend && docker build -t ${FRONTEND_DOCKER_IMAGE} .'
+                dir('Frontend') {
+                    sh 'docker build -t ${FRONTEND_DOCKER_IMAGE} .'
+                }
+            }
+            post {
+                failure {
+                    echo 'Docker image build failed.'
                 }
             }
         }
@@ -39,13 +86,18 @@ pipeline {
                     }
                 }
             }
+            post {
+                failure {
+                    echo 'Docker image push failed.'
+                }
+            }
         }
         stage('Update Deployment') {
             steps {
-                script {
+                withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
                     sh '''
                         git config user.email "sahanalakshminarayanan@gmail.com"
-                        git config user.name "Sahana"
+                        git config user.name "Sahana L"
                         sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" Frontend/app-manifests/deployment.yml
                         git add Frontend/app-manifests/deployment.yml
                         git commit -m "Update frontend deployment image to version ${BUILD_NUMBER}"
@@ -53,6 +105,19 @@ pipeline {
                     '''
                 }
             }
+            post {
+                failure {
+                    echo 'Deployment file update or Git push failed.'
+                }
+            }
+        }
+    }
+    post {
+        always {
+            echo 'Frontend pipeline execution completed.'
+        }
+        failure {
+            echo 'Frontend pipeline failed. Notifying stakeholders...'
         }
     }
 }
