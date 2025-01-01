@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: LMS-Portal-FDeployment
+  labels:
+    app: angular-lms-portal
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: angular-lms-portal
+  template:
+    metadata:
+      labels:
+        app: angular-lms-portal
+    spec:
+      containers:
+      - name: angular-lms-portal
+        image: sahanal/angular-lms-portal:latest
+        ports:
+        - containerPort: 4200
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "250m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
