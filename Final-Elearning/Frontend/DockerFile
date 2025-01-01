@@ -1,25 +1,9 @@
-# Base image for Node.js to build the Angular app
 FROM node:16 as build
-
-# Set the working directory inside the container
 WORKDIR /app
+COPY ./src /app/src
+COPY ./angular.json /app/angular.json
+RUN npm install && ng build --prod
 
-# Copy package files and install dependencies
-COPY package*.json ./
-RUN npm install
-
-# Copy the rest of the application files and build the app
-COPY . .
-RUN npm run build --prod
-
-# Base image for serving static files
 FROM nginx:alpine
-
-# Copy built files to the default nginx directory
 COPY --from=build /app/dist/ElearningManagement /usr/share/nginx/html
-
-# Expose port 80
 EXPOSE 80
-
-# Start Nginx
-CMD ["nginx", "-g", "daemon off;"]

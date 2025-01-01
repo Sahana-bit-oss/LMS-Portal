@@ -1,5 +1,5 @@
 # Base image for Java
-FROM adoptopenjdk/openjdk11:alpine-jre
+FROM adoptopenjdk/rapidfort/tomcat10-openjdk17-ib:alpine-jre
 
 # Define the build artifact path as an argument
 ARG artifact=target/spring-boot-web.jar
