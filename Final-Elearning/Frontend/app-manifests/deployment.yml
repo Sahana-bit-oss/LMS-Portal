@@ -26,3 +26,16 @@ spec:
           limits:
             memory: "256Mi"
             cpu: "500m"
+        # Readiness and Liveness Probes
+        readinessProbe:
+          httpGet:
+            path: /index.html
+            port: 4200
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /index.html
+            port: 4200
+          initialDelaySeconds: 15
+          periodSeconds: 20
