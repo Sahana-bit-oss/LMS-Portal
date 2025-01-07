@@ -1,14 +1,14 @@
-# Base image for Java
-FROM adoptopenjdk/rapidfort/tomcat10-openjdk17-ib:alpine-jre
 
-# Define the build artifact path as an argument
-ARG artifact=target/spring-boot-web.jar
+#Base Image for java
+FROM adoptopenjdk/openjdk11:x86_64-alpine-jre-11.0.5_10
 
-# Set the working directory inside the container
-WORKDIR /opt/app
+#simply the artifact path
+ARG artifact=target/ELearningManagement-0.0.1-SNAPSHOT.jar
 
-# Copy the built Spring Boot JAR file into the container
-COPY ${artifact} app.jar
+WORKDIR /app
 
-# Run the application
-ENTRYPOINT ["java", "-jar", "app.jar"]
+COPY ${artifact} /app/app.jar
+
+
+#Set the default command to run the Java application when the container starts
+ENTRYPOINT ["java","-jar","/app/app.jar"]
