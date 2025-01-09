@@ -1,0 +1,24 @@
+version : '3.8'
+
+services:
+  app:
+    image: lms-portal
+    ports:
+      - 8080:8080
+    environment:
+
+      spring.datasource.url : jdbc:mysql://localhost:3306/LMSPortal
+      spring.datasource.username : root
+      spring.datasource.password : sahajosi@2
+
+    depends_on:
+      - db
+  db:
+    image: mysql
+    environment:
+      DATABASE_HOST: docker-mysql
+      DATABASE_PORT: 3306
+      MYSQL_ROOT_PASSWORD: sahajosi@2
+      MYSQL_DATABASE: LMSPortal
+      MYSQL_USER: root
+      MYSQL_PASSWRORD: Sahajosi@247

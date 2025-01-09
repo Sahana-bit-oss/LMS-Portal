@@ -16,13 +16,14 @@ RUN npm cache clean --force
 RUN npm install --legacy-peer-deps
 
 
+
 # Copy the rest of the source code
 # COPY ./src /app/src
 # COPY ./angular.json /app/angular.json
 
 
 # Build the Angular app
-RUN ng build --configuration production
+# RUN ng build --configuration production
 
 
 # FROM nginx
