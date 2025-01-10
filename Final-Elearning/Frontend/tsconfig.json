@@ -15,30 +15,12 @@
     "importHelpers": true,
     "target": "es2017",
     "module": "es2020",
-    "lib": [
-      "es2018",
-      "dom"
-    ],
-    "typeRoots": ["node_modules/@types"],
-    "types": [
-      "node",
-      "express",
-      "cors",
-      "body-parser",
-      "jquery",
-      "jasmine",
-      "serve-static",
-      "http-errors"
-    ]
+    "lib": ["es2018", "dom"]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
-  },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.d.ts"
-  ]
+  }
 }
