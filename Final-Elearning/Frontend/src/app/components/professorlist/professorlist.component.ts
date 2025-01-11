@@ -4,9 +4,10 @@ import { Professor } from 'src/app/models/professor';
 import { ProfessorService } from 'src/app/services/professor.service';
 
 @Component({
-  selector: 'app-professorlist',
-  templateUrl: './professorlist.component.html',
-  styleUrls: ['./professorlist.component.css']
+    selector: 'app-professorlist',
+    templateUrl: './professorlist.component.html',
+    styleUrls: ['./professorlist.component.css'],
+    standalone: false
 })
 export class ProfessorlistComponent implements OnInit {
 

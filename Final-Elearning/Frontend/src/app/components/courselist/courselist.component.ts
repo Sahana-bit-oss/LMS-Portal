@@ -11,9 +11,10 @@ import { UserService } from 'src/app/services/user.service';
 declare var $: any;
 
 @Component({
-  selector: 'app-courselist',
-  templateUrl: './courselist.component.html',
-  styleUrls: ['./courselist.component.css']
+    selector: 'app-courselist',
+    templateUrl: './courselist.component.html',
+    styleUrls: ['./courselist.component.css'],
+    standalone: false
 })
 
 export class CourselistComponent implements OnInit  {

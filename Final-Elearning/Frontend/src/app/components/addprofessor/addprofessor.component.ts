@@ -7,9 +7,10 @@ import { ProfessorService } from 'src/app/services/professor.service';
 import { RegistrationService } from 'src/app/services/registration.service';
 
 @Component({
-  selector: 'app-addprofessor',
-  templateUrl: './addprofessor.component.html',
-  styleUrls: ['./addprofessor.component.css']
+    selector: 'app-addprofessor',
+    templateUrl: './addprofessor.component.html',
+    styleUrls: ['./addprofessor.component.css'],
+    standalone: false
 })
 export class AddprofessorComponent implements OnInit {
 

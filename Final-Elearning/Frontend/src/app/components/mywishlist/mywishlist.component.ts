@@ -5,9 +5,10 @@ import { Wishlist } from 'src/app/models/wishlist';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-mywishlist',
-  templateUrl: './mywishlist.component.html',
-  styleUrls: ['./mywishlist.component.css']
+    selector: 'app-mywishlist',
+    templateUrl: './mywishlist.component.html',
+    styleUrls: ['./mywishlist.component.css'],
+    standalone: false
 })
 export class MywishlistComponent implements OnInit {
 

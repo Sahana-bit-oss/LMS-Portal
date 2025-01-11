@@ -4,9 +4,10 @@ import { Observable } from 'rxjs';
 import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
-  selector: 'app-professordashboard',
-  templateUrl: './professordashboard.component.html',
-  styleUrls: ['./professordashboard.component.css']
+    selector: 'app-professordashboard',
+    templateUrl: './professordashboard.component.html',
+    styleUrls: ['./professordashboard.component.css'],
+    standalone: false
 })
 export class ProfessordashboardComponent implements OnInit {
 

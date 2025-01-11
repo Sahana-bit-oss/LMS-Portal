@@ -10,9 +10,10 @@ declare var require: any;
 const FileSaver = require('file-saver');
 
 @Component({
-  selector: 'app-fullcourse',
-  templateUrl: './fullcourse.component.html',
-  styleUrls: ['./fullcourse.component.css']
+    selector: 'app-fullcourse',
+    templateUrl: './fullcourse.component.html',
+    styleUrls: ['./fullcourse.component.css'],
+    standalone: false
 })
 export class FullcourseComponent implements OnInit {
 

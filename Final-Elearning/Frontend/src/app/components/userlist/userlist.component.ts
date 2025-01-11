@@ -4,9 +4,10 @@ import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-userlist',
-  templateUrl: './userlist.component.html',
-  styleUrls: ['./userlist.component.css']
+    selector: 'app-userlist',
+    templateUrl: './userlist.component.html',
+    styleUrls: ['./userlist.component.css'],
+    standalone: false
 })
 export class UserlistComponent implements OnInit {
 

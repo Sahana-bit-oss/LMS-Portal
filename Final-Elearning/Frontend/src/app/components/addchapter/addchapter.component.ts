@@ -8,9 +8,10 @@ import * as $ from 'jquery';
 import { Course } from 'src/app/models/course';
 
 @Component({
-  selector: 'app-addchapter',
-  templateUrl: './addchapter.component.html',
-  styleUrls: ['./addchapter.component.css']
+    selector: 'app-addchapter',
+    templateUrl: './addchapter.component.html',
+    styleUrls: ['./addchapter.component.css'],
+    standalone: false
 })
 export class AddchapterComponent implements OnInit {
 

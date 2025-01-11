@@ -6,9 +6,10 @@ import { Enrollment } from 'src/app/models/enrollment';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-mycourses',
-  templateUrl: './mycourses.component.html',
-  styleUrls: ['./mycourses.component.css']
+    selector: 'app-mycourses',
+    templateUrl: './mycourses.component.html',
+    styleUrls: ['./mycourses.component.css'],
+    standalone: false
 })
 export class MycoursesComponent implements OnInit {
 

@@ -5,9 +5,10 @@ import { Professor } from 'src/app/models/professor';
 import { ProfessorService } from 'src/app/services/professor.service';
 
 @Component({
-  selector: 'app-professorprofile',
-  templateUrl: './professorprofile.component.html',
-  styleUrls: ['./professorprofile.component.css']
+    selector: 'app-professorprofile',
+    templateUrl: './professorprofile.component.html',
+    styleUrls: ['./professorprofile.component.css'],
+    standalone: false
 })
 export class ProfessorprofileComponent implements OnInit {
  

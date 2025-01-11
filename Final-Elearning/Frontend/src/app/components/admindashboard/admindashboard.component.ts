@@ -5,9 +5,10 @@ import { AdminService } from 'src/app/services/admin.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-admindashboard',
-  templateUrl: './admindashboard.component.html',
-  styleUrls: ['./admindashboard.component.css']
+    selector: 'app-admindashboard',
+    templateUrl: './admindashboard.component.html',
+    styleUrls: ['./admindashboard.component.css'],
+    standalone: false
 })
 export class AdmindashboardComponent implements OnInit {
 

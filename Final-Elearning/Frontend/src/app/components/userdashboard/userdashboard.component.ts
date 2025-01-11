@@ -3,9 +3,10 @@ import { Observable } from 'rxjs';
 import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
-  selector: 'app-userdashboard',
-  templateUrl: './userdashboard.component.html',
-  styleUrls: ['./userdashboard.component.css']
+    selector: 'app-userdashboard',
+    templateUrl: './userdashboard.component.html',
+    styleUrls: ['./userdashboard.component.css'],
+    standalone: false
 })
 export class UserdashboardComponent implements OnInit {
 
