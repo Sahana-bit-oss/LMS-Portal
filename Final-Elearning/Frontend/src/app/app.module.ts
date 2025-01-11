@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -30,42 +30,35 @@ import { MycoursesComponent } from './components/mycourses/mycourses.component';
 import { MywishlistComponent } from './components/mywishlist/mywishlist.component';
 import { WelcomepageComponent } from './components/welcomepage/welcomepage.component';
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    RegistrationComponent,
-    RegistrationsuccessComponent,
-    UserdashboardComponent,
-    ProfessordashboardComponent,
-    AdmindashboardComponent,
-    HeaderComponent,
-    FooterComponent,
-    UserprofileComponent,
-    ProfessorprofileComponent,
-    AddprofessorComponent,
-    ApprovalstatusComponent,
-    AddcourseComponent,
-    UserlistComponent,
-    ProfessorlistComponent,
-    CourselistComponent,
-    FullcourseComponent,
-    AddchapterComponent,
-    MycoursesComponent,
-    MywishlistComponent,
-    WelcomepageComponent
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    AppRoutingModule,
-    CarouselModule,
-    YouTubePlayerModule,
-    MDBBootstrapModule.forRoot()
-  ],
-  providers: [],
-  bootstrap: [AppComponent, RegistrationComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        LoginComponent,
+        RegistrationComponent,
+        RegistrationsuccessComponent,
+        UserdashboardComponent,
+        ProfessordashboardComponent,
+        AdmindashboardComponent,
+        HeaderComponent,
+        FooterComponent,
+        UserprofileComponent,
+        ProfessorprofileComponent,
+        AddprofessorComponent,
+        ApprovalstatusComponent,
+        AddcourseComponent,
+        UserlistComponent,
+        ProfessorlistComponent,
+        CourselistComponent,
+        FullcourseComponent,
+        AddchapterComponent,
+        MycoursesComponent,
+        MywishlistComponent,
+        WelcomepageComponent
+    ],
+    bootstrap: [AppComponent, RegistrationComponent], imports: [BrowserModule,
+        FormsModule,
+        ReactiveFormsModule,
+        AppRoutingModule,
+        CarouselModule,
+        YouTubePlayerModule,
+        MDBBootstrapModule.forRoot()], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule { }
