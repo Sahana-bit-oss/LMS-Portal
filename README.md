@@ -56,7 +56,7 @@ cd LMS-Portal
    ```bash
    npm install
    ```
-3. Set environment variables
+3. Set environment variables (optional)
  ``` bash
     set NODE_OPTIONS=--openssl-legacy-provider
     $env:NODE_OPTIONS="--openssl-legacy-provider"
